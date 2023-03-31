@@ -222,46 +222,13 @@ class Event(db.Model): ## tabla de eventos
     hours = db.Column(db.String(), unique=False, nullable=False) #duracion del evento en horas
     minutes = db.Column(db.String(), unique=False, nullable=False)#duracion del evento en minutos
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "start": self.start,
-            "end": self.end,
-            "map": self.map,
-            "owner_id": self.owner_id,
-            "date": self.date,
-            "private": self.private,
-            "slug": self.slug,
-            "description": self.description,
-            "origin_lon": self.origin_lon,
-            "origin_lat": self.origin_lat,
-            "destination_lon": self.destination_lon,
-            "destination_lat": self.destination_lat,
-            "hours": self.hours,
-            "minutes": self.minutes
-        }
+###CREA LA FUNCIÓN "SERIALIZE" PARA QUE CUANDO LLAMES A UN OBJETO DE CLASE EVENT TE DEVUELVA LAS PROPIEDADES NECESARIAS####
+    
 
 
-class User_Data(db.Model): ## informacion del usuario 
-    id = db.Column(db.Integer, primary_key=True) ## id tabla
-    name = db.Column(db.String(120), unique=False, nullable=False)
-    last_name = db.Column(db.String(120), unique=False, nullable=False)
-    address = db.Column(db.String(120), unique=False, nullable=True)
-    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'), nullable=False)
-    profile_picture = db.Column(
-        db.Integer(), db.ForeignKey('image.id'), nullable=True)
+    
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "last_name": self.last_name,
-            "address": self.address,
-            "user_id": self.user_id,
-            "profile_picture": self.profile_picture
-        }
-
+###CREA UNA TABLA USER_DATA CON UNA RELACIÓN 1-1 QUE CONTENGA LA INFORMACIÓN DEL USUARIO###
 
 class Image(db.Model):#tabla para imagen de perfil del usuario
     id = db.Column(db.Integer, primary_key=True)
